@@ -47,7 +47,7 @@ export function ServicesSection() {
                   </p>
                   <Link
                     href="/services"
-                    className={cn(buttonVariants({ variant: "outlineDark", size: "sm" }), "mt-auto w-fit")}
+                    className={cn(buttonVariants({ variant: "outlineDark", size: "sm" }), "mt-16 w-fit")}
                   >
                     Learn more
                   </Link>

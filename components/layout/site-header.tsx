@@ -178,9 +178,9 @@ export function SiteHeader() {
                 }
               }}
               className={cn(
-                "relative rounded-full px-4 py-2 text-sm font-semibold text-white/60 transition-all duration-300 ease-[var(--ease-premium)] hover:bg-white/[0.05] hover:text-white",
+                "relative rounded-md px-4 py-2 text-sm font-semibold text-white/60 transition-all duration-300 ease-[var(--ease-premium)] hover:bg-white/[0.05] hover:text-white",
                 isActiveNavLink(link.href, pathname, activeHash) &&
-                  "bg-primary text-white shadow-[0_0_0_1px_rgba(255,255,255,0.04)]"
+                  "text-primary"
               )}
             >
               {link.label}
@@ -193,7 +193,7 @@ export function SiteHeader() {
           href="/#contact"
           className={cn(
             buttonVariants({ variant: "orange", size: "lg", className: "hover:shadow-none hover:translate-none" }),
-            "hidden items-center gap-2 rounded-full lg:inline-flex"
+            "hidden items-center gap-2 lg:inline-flex"
           )}
         >
           Build with us
@@ -204,7 +204,7 @@ export function SiteHeader() {
           href="/#contact"
           className={cn(
             buttonVariants({ variant: "orange", size: "lg", className: "px-4 hover:shadow-none hover:translate-none" }),
-            "inline-flex items-center gap-1.5 rounded-full lg:hidden"
+            "inline-flex items-center gap-1.5 lg:hidden"
           )}
         >
           Build with us

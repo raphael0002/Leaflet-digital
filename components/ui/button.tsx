@@ -10,15 +10,15 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
         orange:
-          "rounded-full bg-[var(--brand)] px-5 text-white shadow-[0_0_0_1px_rgba(248,130,33,0.2)] hover:bg-[var(--brand-hover)] hover:shadow-none active:translate-y-0 active:scale-[0.99]",
+          "rounded-md bg-[var(--brand)] px-5 text-white shadow-[0_0_0_1px_rgba(248,130,33,0.2)] hover:bg-[var(--brand-hover)] hover:shadow-none active:translate-y-0 active:scale-[0.99]",
         dark:
-          "rounded-full border-white/10 bg-white/[0.06] text-[var(--text)] hover:-translate-y-px hover:bg-white/[0.1]",
+          "rounded-md border-white/10 bg-white/[0.06] text-[var(--text)] hover:-translate-y-px hover:bg-white/[0.1]",
         outlineDark:
-          "rounded-full border-white/15 bg-transparent text-[var(--text)] hover:-translate-y-px hover:border-white/25 hover:bg-white/[0.06]",
+          "rounded-md border-white/15 bg-transparent text-[var(--text)] hover:-translate-y-px hover:border-white/25 hover:bg-white/[0.06]",
         ghostDark:
-          "rounded-full bg-transparent text-[var(--text-soft)] hover:bg-white/[0.06] hover:text-white",
+          "rounded-md bg-transparent text-[var(--text-soft)] hover:bg-white/[0.06] hover:text-white",
         white:
-          "rounded-full bg-white px-4 text-black hover:-translate-y-px hover:bg-white/90",
+          "rounded-md bg-white px-4 text-black hover:-translate-y-px hover:bg-white/90",
         linkArrow:
           "h-auto rounded-none bg-transparent px-0 text-[var(--text)] hover:text-[var(--brand)]",
         outline:

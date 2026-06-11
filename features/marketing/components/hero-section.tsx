@@ -57,7 +57,7 @@ export function HeroSection() {
                     href="/contact"
                     className={cn(
                       buttonVariants({ variant: "orange", size: "lg" }),
-                      "h-[52px] w-full min-w-[240px] rounded-full text-[15px] shadow-[0_12px_34px_rgba(248,130,33,0.18)] sm:w-auto"
+                      "h-[52px] w-full min-w-[240px] text-[15px] shadow-[0_12px_34px_rgba(248,130,33,0.18)] sm:w-auto"
                     )}
                   >
                     Book a free consultation
@@ -67,7 +67,7 @@ export function HeroSection() {
                     href="/work"
                     className={cn(
                       buttonVariants({ variant: "outlineDark", size: "lg" }),
-                      "h-[52px] w-full min-w-[168px] rounded-full border-white/22 bg-transparent text-[15px] text-white/76 hover:border-white/34 hover:bg-white/[0.04] sm:w-auto"
+                      "h-[52px] w-full min-w-[168px] border-white/22 bg-transparent text-[15px] text-white/76 hover:border-white/34 hover:bg-white/[0.04] sm:w-auto"
                     )}
                   >
                     See our work
