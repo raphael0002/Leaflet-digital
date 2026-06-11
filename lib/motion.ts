@@ -85,7 +85,7 @@ export const slowStaggerContainer: Variants = {
 }
 
 export const cardHover = {
-  y: -4,
+  y: -1,
   borderColor: "rgba(248, 130, 33, 0.28)",
   backgroundColor: "var(--card-hover)",
   transition: normalTransition,

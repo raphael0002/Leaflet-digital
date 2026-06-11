@@ -16,7 +16,7 @@ const icons = {
 
 export function AboutStorySection() {
   return (
-    <section className="relative isolate overflow-hidden bg-[var(--background)] py-16 md:py-28">
+    <section id="about" className="relative isolate overflow-hidden bg-[var(--background)] py-16 md:py-28">
       <SectionLabel>About us</SectionLabel>
       <Container wide className="relative">
         <FloatingSquares className="absolute right-0 top-0 z-0" />

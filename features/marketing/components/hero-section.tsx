@@ -18,7 +18,7 @@ const logos = clientLogos.map((label, index) => ({
 
 export function HeroSection() {
   return (
-    <section className="relative isolate min-h-screen overflow-hidden bg-[#080706]">
+    <section id="home" className="relative isolate min-h-screen overflow-hidden bg-[#080706] md:pt-12 lg:pt-16">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* base dark background */}
@@ -79,7 +79,7 @@ export function HeroSection() {
           </Reveal>
         </div>
 
-        <Reveal className="mx-auto mt-12 w-full max-w-[1400px] sm:mt-36" delay={0.16}>
+        <Reveal className="mx-auto mt-20 w-full max-w-[1400px]" delay={0.16}>
           <p className="text-center font-mono text-[11px] uppercase tracking-[0.24em] text-white/20">
             WE HAVE WORKED WITH LARGE CORPORATE TEAMS
           </p>

@@ -10,7 +10,7 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
         orange:
-          "rounded-full bg-[var(--brand)] px-5 text-white shadow-[0_0_0_1px_rgba(248,130,33,0.2)] hover:-translate-y-px hover:bg-[var(--brand-hover)] hover:shadow-[0_10px_26px_rgba(248,130,33,0.18)] active:translate-y-0 active:scale-[0.99]",
+          "rounded-full bg-[var(--brand)] px-5 text-white shadow-[0_0_0_1px_rgba(248,130,33,0.2)] hover:bg-[var(--brand-hover)] hover:shadow-none active:translate-y-0 active:scale-[0.99]",
         dark:
           "rounded-full border-white/10 bg-white/[0.06] text-[var(--text)] hover:-translate-y-px hover:bg-white/[0.1]",
         outlineDark:
@@ -43,6 +43,7 @@ const buttonVariants = cva(
         "icon-sm":
           "size-8 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-md",
         "icon-lg": "size-10",
+        "icon-xl": "size-12",
       },
     },
     defaultVariants: {

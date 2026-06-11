@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 
 export function FinalCTASection() {
   return (
-    <section className="relative overflow-hidden border-t border-white/[0.06] bg-[var(--background-deep)] py-24 md:py-36">
+    <section id="contact" className="relative overflow-hidden border-t border-white/[0.06] bg-[var(--background-deep)] py-24 md:py-36">
       <GradientGrid className="opacity-45" />
       <Container wide className="relative text-center">
         <Reveal>

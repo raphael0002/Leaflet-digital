@@ -7,7 +7,7 @@ export function FloatingSquares({ className }: { className?: string }) {
         <span
           key={index}
           className={cn(
-            "size-16 rounded-[14px] bg-[#343434] opacity-95 xl:size-[88px]",
+            "size-16 rounded-[14px] bg-[#343434] opacity-25 xl:size-[88px]",
             (index === 0 || index === 8) && "opacity-0"
           )}
         />

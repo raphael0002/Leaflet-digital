@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { MotionProvider } from "@/components/animations/motion-provider";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { GoToTop } from "@/components/layout/go-to-top";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -71,6 +72,7 @@ export default function RootLayout({
           <SiteHeader />
           {children}
           <SiteFooter />
+           <GoToTop />
         </MotionProvider>
       </body>
     </html>
