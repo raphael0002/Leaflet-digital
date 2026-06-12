@@ -1,10 +1,17 @@
+// components/methodology/process-wheel.tsx
 "use client"
 
 import type { CSSProperties, KeyboardEvent } from "react"
 import { useMemo } from "react"
+import { AnimatePresence, motion } from "motion/react"
 
 import type { ProcessStep } from "@/features/marketing/types"
+import { premiumEase } from "@/lib/motion"
 import { cn } from "@/lib/utils"
+
+/* ------------------------------------------------------------------ */
+/*  Props                                                              */
+/* ------------------------------------------------------------------ */
 
 type ProcessWheelProps = {
   steps: ProcessStep[]
@@ -12,6 +19,10 @@ type ProcessWheelProps = {
   rotationAngle: number
   onSelect: (index: number) => void
 }
+
+/* ------------------------------------------------------------------ */
+/*  Geometry constants                                                 */
+/* ------------------------------------------------------------------ */
 
 const SIZE = 600
 const CENTER = SIZE / 2
@@ -22,13 +33,95 @@ const MID_R = (OUTER_R + INNER_R) / 2
 const LABEL_R = MID_R
 const CHEVRON_DEG = 7
 
+/* ------------------------------------------------------------------ */
+/*  Center content animation variants                                  */
+/* ------------------------------------------------------------------ */
+
+const centerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.08,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.15,
+      ease: premiumEase,
+    },
+  },
+}
+
+const centerIndex = {
+  hidden: { opacity: 0, scale: 0.7 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.35, ease: premiumEase },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.8,
+    transition: { duration: 0.12, ease: premiumEase },
+  },
+}
+
+const centerTitle = {
+  hidden: { opacity: 0, y: 8, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.4, ease: premiumEase },
+  },
+  exit: {
+    opacity: 0,
+    y: -6,
+    filter: "blur(4px)",
+    transition: { duration: 0.12, ease: premiumEase },
+  },
+}
+
+const centerDesc = {
+  hidden: { opacity: 0, y: 6 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.38, ease: premiumEase },
+  },
+  exit: {
+    opacity: 0,
+    y: -4,
+    transition: { duration: 0.1, ease: premiumEase },
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/*  Glow pulse animation — ambient background behind wheel             */
+/* ------------------------------------------------------------------ */
+
+const glowPulse = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1.2, ease: premiumEase },
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/*  Geometry helpers                                                   */
+/* ------------------------------------------------------------------ */
+
 function round(value: number) {
   return Math.round(value * 1000) / 1000
 }
 
 function polar(angleDeg: number, radius: number) {
   const angle = ((angleDeg - 90) * Math.PI) / 180
-
   return {
     x: round(CENTER + radius * Math.cos(angle)),
     y: round(CENTER + radius * Math.sin(angle)),
@@ -40,10 +133,8 @@ function segmentPath(startDeg: number, endDeg: number) {
   const outerEnd = polar(endDeg, OUTER_R)
   const innerEnd = polar(endDeg, INNER_R)
   const innerStart = polar(startDeg, INNER_R)
-
   const tipEnd = polar(endDeg + CHEVRON_DEG, MID_R)
   const tipStart = polar(startDeg + CHEVRON_DEG, MID_R)
-
   const largeArc = endDeg - startDeg > 180 ? 1 : 0
 
   return [
@@ -61,9 +152,12 @@ function labelArcPath(startDeg: number, endDeg: number) {
   const start = polar(startDeg, LABEL_R)
   const end = polar(endDeg, LABEL_R)
   const largeArc = endDeg - startDeg > 180 ? 1 : 0
-
   return `M ${start.x} ${start.y} A ${LABEL_R} ${LABEL_R} 0 ${largeArc} 1 ${end.x} ${end.y}`
 }
+
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
 
 export function ProcessWheel({
   steps,
@@ -101,7 +195,13 @@ export function ProcessWheel({
 
   return (
     <div className="relative aspect-square w-full max-w-[600px]">
-      <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(248,130,33,0.14),transparent_62%)] blur-2xl" />
+      {/* Ambient glow — fades in on mount */}
+      <motion.div
+        variants={glowPulse}
+        initial="hidden"
+        animate="visible"
+        className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(248,130,33,0.14),transparent_62%)] blur-2xl"
+      />
 
       <svg
         viewBox={`0 0 ${SIZE} ${SIZE}`}
@@ -120,6 +220,7 @@ export function ProcessWheel({
           ))}
         </defs>
 
+        {/* Rotating ring */}
         <g
           className="process-wheel-rotate will-change-transform"
           style={
@@ -175,7 +276,7 @@ export function ProcessWheel({
           })}
         </g>
 
-
+        {/* Inner circle fill */}
         <circle
           cx={CENTER}
           cy={CENTER}
@@ -184,20 +285,39 @@ export function ProcessWheel({
         />
       </svg>
 
+      {/* Center content — animates on step change */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-[26%]">
-        <div key={active.id} className="process-center-reveal text-center">
-          <span className="font-mono text-xs tracking-[0.3em] text-[var(--brand)]">
-            {active.index}
-          </span>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active.id}
+            variants={centerContainer}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="text-center"
+          >
+            <motion.span
+              variants={centerIndex}
+              className="inline-block font-mono text-xs tracking-[0.3em] text-[var(--brand)]"
+            >
+              {active.index}
+            </motion.span>
 
-          <h3 className="mt-2 text-balance font-heading text-lg font-semibold leading-tight text-[var(--foreground)] md:text-xl">
-            {active.title}
-          </h3>
+            <motion.h3
+              variants={centerTitle}
+              className="mt-2 text-balance font-heading text-lg font-semibold leading-tight text-[var(--foreground)] md:text-xl"
+            >
+              {active.title}
+            </motion.h3>
 
-          <p className="mt-2 text-pretty text-xs leading-relaxed text-[var(--text-muted)] md:text-sm">
-            {active.description}
-          </p>
-        </div>
+            <motion.p
+              variants={centerDesc}
+              className="mt-2 text-pretty text-xs leading-relaxed text-[var(--text-muted)] md:text-sm"
+            >
+              {active.description}
+            </motion.p>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )

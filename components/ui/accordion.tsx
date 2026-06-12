@@ -53,13 +53,25 @@ function AccordionContent({
   return (
     <AccordionPrimitive.Panel
       data-slot="accordion-content"
-      className="overflow-hidden text-sm transition-opacity duration-300 ease-[var(--ease-premium)] data-closed:opacity-0 data-open:opacity-100 data-open:animate-accordion-down data-closed:animate-accordion-up"
+      className={cn(
+        "overflow-hidden",
+        // Height transition — Base UI sets --accordion-panel-height
+        // data-starting-style and data-ending-style cap it at 0
+        // This is the ONLY animation — no keyframe classes
+        "h-[var(--accordion-panel-height)]",
+        "transition-[height,opacity] duration-300 ease-[var(--ease-premium)]",
+        "data-[starting-style]:h-0 data-[ending-style]:h-0",
+        "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
+      )}
       {...props}
     >
       <div
         className={cn(
-          "h-(--accordion-panel-height) pt-0 pb-4 data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
-          className
+          "pb-8 pt-0",
+          "max-w-[760px] text-base leading-8 text-white/58",
+          "[&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground",
+          "[&_p:not(:last-child)]:mb-4",
+          className,
         )}
       >
         {children}

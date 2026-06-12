@@ -1,94 +1,39 @@
+// features/marketing/components/dual-cta-section.tsx
 "use client"
+
+import type { ReactNode } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import type { ReactNode } from "react"
+import { motion } from "motion/react"
 
 import { buttonVariants } from "@/components/ui/button"
 import { Container } from "@/components/shared/container"
-import { StaggerItem, StaggerReveal } from "@/components/animations/reveal"
 import { Globe3D, type GlobeMarker } from "@/components/ui/3d-globe"
 import { ThreeDMarquee } from "@/components/ui/3d-marquee"
+import {
+  fadeUpScale,
+  sectionStagger,
+  sectionViewport,
+} from "@/lib/motion"
 import { cn } from "@/lib/utils"
 
+const grid = sectionStagger(0.14, 0.06)
+const card = fadeUpScale(36, 0.97, 0.68)
+
 const sampleMarkers: GlobeMarker[] = [
-  {
-    lat: 40.7128,
-    lng: -74.006,
-    src: "https://assets.aceternity.com/avatars/1.webp",
-    label: "New York",
-  },
-  {
-    lat: 51.5074,
-    lng: -0.1278,
-    src: "https://assets.aceternity.com/avatars/2.webp",
-    label: "London",
-  },
-  {
-    lat: 35.6762,
-    lng: 139.6503,
-    src: "https://assets.aceternity.com/avatars/3.webp",
-    label: "Tokyo",
-  },
-  {
-    lat: -33.8688,
-    lng: 151.2093,
-    src: "https://assets.aceternity.com/avatars/4.webp",
-    label: "Sydney",
-  },
-  {
-    lat: 48.8566,
-    lng: 2.3522,
-    src: "https://assets.aceternity.com/avatars/5.webp",
-    label: "Paris",
-  },
-  {
-    lat: 28.6139,
-    lng: 77.209,
-    src: "https://assets.aceternity.com/avatars/6.webp",
-    label: "New Delhi",
-  },
-  {
-    lat: 55.7558,
-    lng: 37.6173,
-    src: "https://assets.aceternity.com/avatars/7.webp",
-    label: "Moscow",
-  },
-  {
-    lat: -22.9068,
-    lng: -43.1729,
-    src: "https://assets.aceternity.com/avatars/8.webp",
-    label: "Rio de Janeiro",
-  },
-  {
-    lat: 31.2304,
-    lng: 121.4737,
-    src: "https://assets.aceternity.com/avatars/9.webp",
-    label: "Shanghai",
-  },
-  {
-    lat: 25.2048,
-    lng: 55.2708,
-    src: "https://assets.aceternity.com/avatars/10.webp",
-    label: "Dubai",
-  },
-  {
-    lat: -34.6037,
-    lng: -58.3816,
-    src: "https://assets.aceternity.com/avatars/11.webp",
-    label: "Buenos Aires",
-  },
-  {
-    lat: 1.3521,
-    lng: 103.8198,
-    src: "https://assets.aceternity.com/avatars/12.webp",
-    label: "Singapore",
-  },
-  {
-    lat: 37.5665,
-    lng: 126.978,
-    src: "https://assets.aceternity.com/avatars/13.webp",
-    label: "Seoul",
-  },
+  { lat: 40.7128, lng: -74.006, src: "https://assets.aceternity.com/avatars/1.webp", label: "New York" },
+  { lat: 51.5074, lng: -0.1278, src: "https://assets.aceternity.com/avatars/2.webp", label: "London" },
+  { lat: 35.6762, lng: 139.6503, src: "https://assets.aceternity.com/avatars/3.webp", label: "Tokyo" },
+  { lat: -33.8688, lng: 151.2093, src: "https://assets.aceternity.com/avatars/4.webp", label: "Sydney" },
+  { lat: 48.8566, lng: 2.3522, src: "https://assets.aceternity.com/avatars/5.webp", label: "Paris" },
+  { lat: 28.6139, lng: 77.209, src: "https://assets.aceternity.com/avatars/6.webp", label: "New Delhi" },
+  { lat: 55.7558, lng: 37.6173, src: "https://assets.aceternity.com/avatars/7.webp", label: "Moscow" },
+  { lat: -22.9068, lng: -43.1729, src: "https://assets.aceternity.com/avatars/8.webp", label: "Rio de Janeiro" },
+  { lat: 31.2304, lng: 121.4737, src: "https://assets.aceternity.com/avatars/9.webp", label: "Shanghai" },
+  { lat: 25.2048, lng: 55.2708, src: "https://assets.aceternity.com/avatars/10.webp", label: "Dubai" },
+  { lat: -34.6037, lng: -58.3816, src: "https://assets.aceternity.com/avatars/11.webp", label: "Buenos Aires" },
+  { lat: 1.3521, lng: 103.8198, src: "https://assets.aceternity.com/avatars/12.webp", label: "Singapore" },
+  { lat: 37.5665, lng: 126.978, src: "https://assets.aceternity.com/avatars/13.webp", label: "Seoul" },
 ]
 
 const marqueeImages = [
@@ -129,8 +74,14 @@ export function DualCTASection() {
   return (
     <section className="bg-[var(--background)] pb-16 md:pb-28">
       <Container wide>
-        <StaggerReveal className="grid gap-6 lg:grid-cols-2">
-          <StaggerItem>
+        <motion.div
+          variants={grid}
+          initial="hidden"
+          whileInView="visible"
+          viewport={sectionViewport}
+          className="grid gap-6 lg:grid-cols-2"
+        >
+          <motion.div variants={card}>
             <CTACard
               label="For businesses"
               title="Scale your digital presence"
@@ -140,19 +91,19 @@ export function DualCTASection() {
               variant="orange"
               visual={<BusinessGlobeVisual />}
             />
-          </StaggerItem>
-          <StaggerItem>
+          </motion.div>
+          <motion.div variants={card}>
             <CTACard
               label="For agencies"
               title="White-label that delivers"
-              body="Reliable white-label development and design support - plug us in and ship under your brand."
+              body="Reliable white-label development and design support — plug us in and ship under your brand."
               href="/contact"
               button="Partner with us"
               variant="outlineDark"
               visual={<AgencyMarqueeVisual />}
             />
-          </StaggerItem>
-        </StaggerReveal>
+          </motion.div>
+        </motion.div>
       </Container>
     </section>
   )
@@ -183,19 +134,16 @@ function CTACard({
       <div className="pointer-events-none absolute inset-x-0 top-0 h-fit bg-[radial-gradient(circle_at_50%_0%,rgba(248,130,33,0.16),transparent_66%)]" />
 
       <div className="relative z-10 mt-auto max-w-sm">
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f0b680] w-fit">
+        <p className="w-fit font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f0b680]">
           {label}
         </p>
-        <h3 className="mt-3 font-heading text-2xl font-semibold leading-tight tracking-tight text-white md:text-[2rem] w-fit">
+        <h3 className="mt-3 w-fit font-heading text-2xl font-semibold leading-tight tracking-tight text-white md:text-[2rem]">
           {title}
         </h3>
         <p className="mt-3 text-sm leading-7 text-white/62">{body}</p>
         <Link
           href={href}
-          className={cn(
-            buttonVariants({ variant, size: "lg" }),
-            "mt-7"
-          )}
+          className={cn(buttonVariants({ variant, size: "lg" }), "mt-7")}
         >
           {button}
           <ArrowRight className="transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -220,7 +168,6 @@ function BusinessGlobeVisual() {
           showAtmosphere: true,
           radius: 4,
         }}
-        
       />
     </div>
   )
