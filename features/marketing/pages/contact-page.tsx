@@ -621,7 +621,7 @@ function EngagementOption({
       type="button"
       onClick={onSelect}
       className={cn(
-        "flex h-fit items-start gap-4 rounded-lg border p-4 text-left transition-colors duration-200",
+        "flex h-auto w-full items-start justify-start gap-4 overflow-hidden rounded-lg border p-4 text-left whitespace-normal transition-colors duration-200",
         active
           ? "border-[var(--brand-border)] bg-[var(--brand-soft)] hover:border-[var(--brand-border)] hover:bg-[var(--brand-soft)]"
           : "border-white/[0.06] bg-[var(--background-soft)] hover:border-white/[0.1] hover:bg-white/[0.04]",
@@ -637,11 +637,12 @@ function EngagementOption({
       >
         <Icon className="h-4 w-4" />
       </span>
-      <span className="flex-1">
-        <span className="block text-[13px] font-medium text-white">
+
+      <span className="flex min-w-0 flex-1 flex-col">
+        <span className="block break-words text-[13px] font-medium text-white">
           {option.title}
         </span>
-        <span className="mt-0.5 block text-[12px] leading-5 text-[var(--text-muted)]">
+        <span className="mt-0.5 block break-words text-[12px] leading-5 text-[var(--text-muted)]">
           {option.body}
         </span>
       </span>
