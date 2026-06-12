@@ -10,6 +10,7 @@ import { SectionLabel } from "@/components/shared/section-label"
 import { processSteps } from "@/features/marketing/data/process"
 import {
   fadeUp,
+  labelViewport,
   sectionStagger,
   sectionViewport,
 } from "@/lib/motion"
@@ -111,7 +112,7 @@ export function MethodologySection() {
         variants={labelV}
         initial="hidden"
         whileInView="visible"
-        viewport={sectionViewport}
+        viewport={labelViewport}
       >
         <SectionLabel>Process</SectionLabel>
       </motion.div>
@@ -220,7 +221,7 @@ export function MethodologySection() {
             {/* Wheel */}
             <motion.div
               variants={wheelReveal}
-              className="hidden items-center justify-center sm:flex"
+              className="items-center justify-center flex"
             >
               <ProcessWheel
                 steps={processSteps}

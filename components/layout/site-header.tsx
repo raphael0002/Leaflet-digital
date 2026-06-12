@@ -11,6 +11,7 @@ import { MobileNav } from "@/components/layout/mobile-nav"
 import { navLinks } from "@/features/marketing/data/nav-links"
 import { premiumEase } from "@/lib/motion"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -91,15 +92,14 @@ export function SiteHeader() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: premiumEase, delay: 0.1 }}
       className={cn(
-        "fixed inset-x-0 top-0 z-[100] transition-all duration-500 ease-[var(--ease-premium)]",
-        scrolled ? "py-0" : "sm:py-4",
+        "fixed inset-x-0 top-0 z-[100] transition-all duration-500 py-0 ease-[var(--ease-premium)]"
       )}
     >
       <div
         className={cn(
           "flex items-center justify-between border transition-all duration-500 ease-[var(--ease-premium)]",
           scrolled
-            ? "relative overflow-hidden border-white/[0.06] bg-[rgba(8,8,8,0.65)] px-4 py-3 shadow-[0_14px_40px_rgba(0,0,0,0.42)] backdrop-blur-xl supports-[backdrop-filter]:bg-[rgba(10,10,10,0.58)] before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/[0.08] before:to-transparent after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:shadow-[0_0_80px_rgba(248,130,33,0.03)] lg:px-16"
+            ? "relative overflow-hidden border-white/[0.06] bg-[rgba(8,8,8,0.75)] px-4 py-3 shadow-[0_14px_40px_rgba(0,0,0,0.2)] backdrop-blur-2xl supports-[backdrop-filter]:bg-[rgba(10,10,10,0.58)] before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/[0.08] before:to-transparent after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:shadow-[0_0_80px_rgba(248,130,33,0.03)] lg:px-16"
             : "border-transparent bg-transparent px-4 py-4 lg:px-16",
         )}
       >
@@ -108,18 +108,38 @@ export function SiteHeader() {
           <MobileNav />
           <Link
             href="/#home"
-            className="font-heading text-[22px] font-extrabold tracking-tight text-white"
+            className="inline-flex items-center gap-2 font-heading font-bold tracking-wide text-white text-[28px]"
           >
-            Leaflet
+            <Image
+              src="/logo_white.svg"
+              alt="Leaflet Digital Solutions"
+              width={64}
+              height={64}
+              priority
+              className="h-8 w-8 object-contain"
+            />
+              <span className="text-[28px] tracking-wider">
+                Leaflet
+              </span>
           </Link>
         </div>
 
         {/* Desktop logo */}
         <Link
           href="/#home"
-          className="hidden font-heading text-[28px] font-extrabold tracking-tight text-white lg:block"
+          className="hidden lg:inline-flex items-center gap-2 font-heading font-bold tracking-wide text-white text-[28px]"
         >
-          Leaflet
+          <Image
+            src="/logo_white.svg"
+            alt="Leaflet Digital Solutions"
+            width={64}
+            height={64}
+            priority
+            className="h-8 w-8 shrink-0 object-contain"
+          />
+            <span className="text-[32px] tracking-wider">
+              Leaflet
+            </span>
         </Link>
 
         {/* Desktop nav */}
@@ -150,7 +170,7 @@ export function SiteHeader() {
 
         {/* Desktop CTA */}
         <Link
-          href="/#contact"
+          href="/contact"
           className={cn(
             buttonVariants({
               variant: "orange",
@@ -165,7 +185,7 @@ export function SiteHeader() {
 
         {/* Mobile CTA */}
         <Link
-          href="/#contact"
+          href="/contact"
           className={cn(
             buttonVariants({
               variant: "orange",

@@ -15,6 +15,7 @@ import {
   fadeIn,
   fadeUp,
   fadeUpScale,
+  labelViewport,
   popIn,
   sectionStagger,
   sectionViewport,
@@ -41,7 +42,7 @@ export function ServicesSection() {
         variants={labelV}
         initial="hidden"
         whileInView="visible"
-        viewport={sectionViewport}
+        viewport={labelViewport}
       >
         <SectionLabel>Services</SectionLabel>
       </motion.div>

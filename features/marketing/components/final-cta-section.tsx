@@ -60,7 +60,7 @@ export function FinalCTASection() {
         >
           <motion.h2
             variants={heading}
-            className="mx-auto max-w-5xl font-heading text-[36px] font-extrabold leading-[1.12] tracking-normal text-white sm:text-[48px] lg:text-[66px]"
+            className="mx-auto max-w-5xl font-heading text-[32px] font-extrabold leading-[1.12] tracking-normal text-white sm:text-[48px] lg:text-[66px]"
           >
             Create something
             <br />
@@ -78,8 +78,8 @@ export function FinalCTASection() {
             <Link
               href="/contact"
               className={cn(
-                buttonVariants({ variant: "orange", size: "lg" }),
-                "mt-10 shadow-[0_0_0_1px_rgba(248,130,33,0.2)] hover:shadow-[0_14px_34px_rgba(248,130,33,0.22)]"
+                buttonVariants({ variant: "orange", size: "lg", }),
+                "mt-10 shadow-[0_0_0_1px_rgba(248,130,33,0.2)] hover:shadow-none"
               )}
             >
               Contact us

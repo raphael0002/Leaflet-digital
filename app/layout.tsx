@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local"
 import { JetBrains_Mono, Manrope } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -7,15 +8,35 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { GoToTop } from "@/components/layout/go-to-top";
 
+
+const satoshi = localFont({
+  src: [
+    {
+      path: "../public/fonts/Satoshi-Variable.ttf",
+      weight: "300 900", // variable range
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Satoshi-VariableItalic.ttf",
+      weight: "300 900",
+      style: "italic",
+    },
+  ],
+  display: "swap",
+  variable: "--font-satoshi",
+  preload: true,
+  fallback: ["system-ui", "arial"],
+})
+
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-});
+// const jetbrainsMono = JetBrains_Mono({
+//   variable: "--font-jetbrains",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://leafletdigitalsolutions.com"),
@@ -63,11 +84,11 @@ export default function RootLayout({
         "h-full",
         "antialiased",
         manrope.variable,
-        jetbrainsMono.variable,
+        satoshi.variable,
         "font-sans"
       )}
     >
-      <body className="min-h-full bg-[var(--background)] text-[var(--text)]">
+      <body className="min-h-full text-[var(--text)]">
         <MotionProvider>
           <SiteHeader />
           {children}

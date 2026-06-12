@@ -15,6 +15,7 @@ import { projects } from "@/features/marketing/data/projects"
 import {
   fadeUp,
   fadeUpScale,
+  labelViewport,
   popIn,
   scaleIn,
   sectionStagger,
@@ -44,7 +45,7 @@ export function ProjectsSection() {
         variants={labelV}
         initial="hidden"
         whileInView="visible"
-        viewport={sectionViewport}
+        viewport={labelViewport}
       >
         <SectionLabel>Our projects</SectionLabel>
       </motion.div>

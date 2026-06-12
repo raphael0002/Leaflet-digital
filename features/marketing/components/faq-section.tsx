@@ -13,7 +13,7 @@ import { Container } from "@/components/shared/container"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { SectionLabel } from "@/components/shared/section-label"
 import { faqs } from "@/features/marketing/data/faqs"
-import { premiumEase, sectionViewport } from "@/lib/motion"
+import { labelViewport, premiumEase, sectionViewport } from "@/lib/motion"
 
 /* ------------------------------------------------------------------ */
 /*  Variants                                                           */
@@ -102,7 +102,7 @@ export function FAQSection() {
         variants={labelReveal}
         initial="hidden"
         whileInView="visible"
-        viewport={sectionViewport}
+        viewport={labelViewport}
       >
         <SectionLabel>FAQ</SectionLabel>
       </motion.div>

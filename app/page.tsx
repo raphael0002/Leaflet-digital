@@ -1,3 +1,4 @@
+// app/page.tsx
 import {
   AboutStorySection,
   DualCTASection,
@@ -7,7 +8,6 @@ import {
   ProcessSection,
   ProjectsSection,
   ServicesSection,
-  StatsStrip,
   TestimonialsSection,
   WhyUsSection,
 } from "@/features/marketing";
@@ -51,7 +51,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <HeroSection />
-      <StatsStrip />
+      {/* StatsStrip removed — it's part of HeroSection now */}
       <AboutStorySection />
       <ServicesSection />
       <ProjectsSection />

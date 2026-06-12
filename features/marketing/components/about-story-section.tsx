@@ -14,6 +14,7 @@ import {
   fadeUp,
   fadeUpScale,
   iconPop,
+  labelViewport,
   scaleIn,
   sectionStagger,
   sectionViewport,
@@ -30,6 +31,7 @@ const text = fadeUp(12, 0.45)
 const squares = scaleIn(0.85, 1)
 const labelV = fadeUp(10, 0.5)
 
+
 export function AboutStorySection() {
   return (
     <section
@@ -40,7 +42,7 @@ export function AboutStorySection() {
         variants={labelV}
         initial="hidden"
         whileInView="visible"
-        viewport={sectionViewport}
+        viewport={labelViewport}
       >
         <SectionLabel>About us</SectionLabel>
       </motion.div>

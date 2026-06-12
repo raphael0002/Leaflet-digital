@@ -32,13 +32,13 @@ export const exitTransition: Transition = {
 /* ------------------------------------------------------------------ */
 
 export const sectionViewport = {
-  once: false,
-  amount: 0.2 as const,
+  once: true,
+  amount: 0.1 as const,
   margin: "0px 0px -8% 0px" as const,
 }
 
 export const heroViewport = {
-  once: false,
+  once: true,
   amount: 0.05 as const,
 }
 
@@ -167,6 +167,16 @@ export const iconPop: Variants = {
     rotate: 0,
     transition: { duration: 0.5, ease: premiumEase, delay: 0.15 },
   },
+}
+
+/* ------------------------------------------------------------------ */
+/*  Section label                                                    */
+/* ------------------------------------------------------------------ */
+
+export const labelViewport = {
+  once: false,
+  amount: 0 as const,
+  margin: "-60px 0px 0px 0px" as const,
 }
 
 /* ------------------------------------------------------------------ */

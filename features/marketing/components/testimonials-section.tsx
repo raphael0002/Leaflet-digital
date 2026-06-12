@@ -13,6 +13,7 @@ import {
   fadeSlideX,
   fadeUp,
   fadeUpScale,
+  labelViewport,
   lineReveal,
   sectionStagger,
   sectionViewport,
@@ -35,7 +36,7 @@ export function TestimonialsSection() {
         variants={labelV}
         initial="hidden"
         whileInView="visible"
-        viewport={sectionViewport}
+        viewport={labelViewport}
       >
         <SectionLabel>Testimonials</SectionLabel>
       </motion.div>

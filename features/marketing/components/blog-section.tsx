@@ -19,6 +19,7 @@ import {
   premiumEase,
   sectionStagger,
   sectionViewport,
+  labelViewport,
 } from "@/lib/motion"
 import { cn } from "@/lib/utils"
 
@@ -40,19 +41,19 @@ export function BlogSection() {
   const [feat, ...rest] = blogPosts
 
   return (
-    <section id="journal" className="relative w-full border-t border-white/[0.08] bg-[var(--background)]">
+    <section id="journal" className="relative w-full  border-white/[0.08] bg-[var(--background)]">
       <motion.div
         variants={labelV}
         initial="hidden"
         whileInView="visible"
-        viewport={sectionViewport}
+        viewport={labelViewport}
       >
-        <SectionLabel className="flex items-center gap-3">
+        <SectionLabel>
           Insights &amp; field notes
         </SectionLabel>
       </motion.div>
 
-      <Container wide className="relative py-20 md:py-28">
+      <Container wide className="relative">
         <motion.div
           variants={orchestrator}
           initial="hidden"

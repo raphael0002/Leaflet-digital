@@ -7,6 +7,7 @@ import { motion } from "motion/react"
 import { Container } from "@/components/shared/container"
 import { footerColumns } from "@/features/marketing/data/footer-links"
 import { fadeUp, sectionStagger } from "@/lib/motion"
+import Image from "next/image"
 
 const grid = sectionStagger(0.08, 0.04)
 const col = fadeUp(18, 0.5)
@@ -28,9 +29,19 @@ export function SiteFooter() {
           <motion.div variants={col}>
             <Link
               href="/"
-              className="font-heading text-3xl font-extrabold text-white"
+              className="inline-flex items-start gap-2 font-heading font-bold tracking-wide text-white text-5xl"
             >
-              Leaflet
+              <Image
+                src="/logo_white.svg"
+                alt="Leaflet Digital Solutions"
+                width={64}
+                height={64}
+                priority
+                className="h-11 w-11 object-contain"
+              />
+              <span className="text-5xl tracking-wider">
+                Leaflet
+              </span>
             </Link>
             <p className="mt-8 max-w-[220px] text-md leading-7 text-white/64">
               Connecting Your Brand to the Digital World.

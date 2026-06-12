@@ -8,35 +8,75 @@ import { motion } from "motion/react"
 
 import { buttonVariants } from "@/components/ui/button"
 import { Container } from "@/components/shared/container"
-import { Globe3D, type GlobeMarker } from "@/components/ui/3d-globe"
 import { ThreeDMarquee } from "@/components/ui/3d-marquee"
+import type { GlobeConfig, Position } from "@/components/ui/globe"
 import {
   fadeUpScale,
   sectionStagger,
   sectionViewport,
 } from "@/lib/motion"
 import { cn } from "@/lib/utils"
+import { GlobeClient } from "@/components/globe-client"
+
+// ─── Animation variants ───────────────────────────────────────────────────────
 
 const grid = sectionStagger(0.14, 0.06)
 const card = fadeUpScale(36, 0.97, 0.68)
 
-const sampleMarkers: GlobeMarker[] = [
-  { lat: 40.7128, lng: -74.006, src: "https://assets.aceternity.com/avatars/1.webp", label: "New York" },
-  { lat: 51.5074, lng: -0.1278, src: "https://assets.aceternity.com/avatars/2.webp", label: "London" },
-  { lat: 35.6762, lng: 139.6503, src: "https://assets.aceternity.com/avatars/3.webp", label: "Tokyo" },
-  { lat: -33.8688, lng: 151.2093, src: "https://assets.aceternity.com/avatars/4.webp", label: "Sydney" },
-  { lat: 48.8566, lng: 2.3522, src: "https://assets.aceternity.com/avatars/5.webp", label: "Paris" },
-  { lat: 28.6139, lng: 77.209, src: "https://assets.aceternity.com/avatars/6.webp", label: "New Delhi" },
-  { lat: 55.7558, lng: 37.6173, src: "https://assets.aceternity.com/avatars/7.webp", label: "Moscow" },
-  { lat: -22.9068, lng: -43.1729, src: "https://assets.aceternity.com/avatars/8.webp", label: "Rio de Janeiro" },
-  { lat: 31.2304, lng: 121.4737, src: "https://assets.aceternity.com/avatars/9.webp", label: "Shanghai" },
-  { lat: 25.2048, lng: 55.2708, src: "https://assets.aceternity.com/avatars/10.webp", label: "Dubai" },
-  { lat: -34.6037, lng: -58.3816, src: "https://assets.aceternity.com/avatars/11.webp", label: "Buenos Aires" },
-  { lat: 1.3521, lng: 103.8198, src: "https://assets.aceternity.com/avatars/12.webp", label: "Singapore" },
-  { lat: 37.5665, lng: 126.978, src: "https://assets.aceternity.com/avatars/13.webp", label: "Seoul" },
+// ─── Globe data ───────────────────────────────────────────────────────────────
+
+const GLOBE_CONFIG: GlobeConfig = {
+  pointSize: 4,
+  globeColor: "#062056",
+  showAtmosphere: true,
+  atmosphereColor: "#f88221",
+  atmosphereAltitude: 0.15,
+  emissive: "#062056",
+  emissiveIntensity: 0.12,
+  shininess: 0.9,
+  polygonColor: "rgba(248,130,33,0.45)",
+  ambientLight: "#88ccff",
+  directionalLeftLight: "#ffffff",
+  directionalTopLight: "#ffffff",
+  pointLight: "#f88221",
+  arcTime: 1800,
+  arcLength: 0.9,
+  rings: 1,
+  maxRings: 3,
+  autoRotate: true,
+  autoRotateSpeed: 0.6,
+}
+
+const ARC_COLORS = ["#f88221", "#ff6b35", "#ffa94d"] as const
+
+const GLOBE_ARCS: Position[] = [
+  { order: 1, startLat: 28.6139,   startLng: 77.209,    endLat: 40.7128,   endLng: -74.006,    arcAlt: 0.4, color: ARC_COLORS[0] },
+  { order: 1, startLat: 51.5074,   startLng: -0.1278,   endLat: 35.6762,   endLng: 139.6503,   arcAlt: 0.5, color: ARC_COLORS[1] },
+  { order: 1, startLat: -19.8856,  startLng: -43.9512,  endLat: -22.9068,  endLng: -43.1729,   arcAlt: 0.1, color: ARC_COLORS[2] },
+  { order: 2, startLat: -33.8688,  startLng: 151.2093,  endLat: 48.8566,   endLng: 2.3522,     arcAlt: 0.6, color: ARC_COLORS[2] },
+  { order: 2, startLat: 1.3521,    startLng: 103.8198,  endLat: 55.7558,   endLng: 37.6173,    arcAlt: 0.3, color: ARC_COLORS[0] },
+  { order: 2, startLat: -15.7855,  startLng: -47.909,   endLat: 36.1628,   endLng: -115.1194,  arcAlt: 0.3, color: ARC_COLORS[1] },
+  { order: 3, startLat: 37.5665,   startLng: 126.978,   endLat: -22.9068,  endLng: -43.1729,   arcAlt: 0.7, color: ARC_COLORS[1] },
+  { order: 3, startLat: 25.2048,   startLng: 55.2708,   endLat: -34.6037,  endLng: -58.3816,   arcAlt: 0.5, color: ARC_COLORS[2] },
+  { order: 3, startLat: 21.3099,   startLng: -157.8581, endLat: 40.7128,   endLng: -74.006,    arcAlt: 0.3, color: ARC_COLORS[0] },
+  { order: 4, startLat: 34.0522,   startLng: -118.2437, endLat: 31.2304,   endLng: 121.4737,   arcAlt: 0.4, color: ARC_COLORS[2] },
+  { order: 4, startLat: 52.52,     startLng: 13.405,    endLat: 28.6139,   endLng: 77.209,     arcAlt: 0.3, color: ARC_COLORS[0] },
+  { order: 4, startLat: -34.6037,  startLng: -58.3816,  endLat: 22.3193,   endLng: 114.1694,   arcAlt: 0.7, color: ARC_COLORS[1] },
+  { order: 5, startLat: -6.2088,   startLng: 106.8456,  endLat: 51.5074,   endLng: -0.1278,    arcAlt: 0.4, color: ARC_COLORS[0] },
+  { order: 5, startLat: 22.3193,   startLng: 114.1694,  endLat: -33.8688,  endLng: 151.2093,   arcAlt: 0.2, color: ARC_COLORS[1] },
+  { order: 5, startLat: 14.5995,   startLng: 120.9842,  endLat: 51.5072,   endLng: -0.1276,    arcAlt: 0.3, color: ARC_COLORS[2] },
+  { order: 6, startLat: -15.4326,  startLng: 28.3159,   endLat: 1.0941,    endLng: -63.3455,   arcAlt: 0.7, color: ARC_COLORS[0] },
+  { order: 6, startLat: 37.5665,   startLng: 126.978,   endLat: 35.6762,   endLng: 139.6503,   arcAlt: 0.1, color: ARC_COLORS[1] },
+  { order: 6, startLat: 22.3193,   startLng: 114.1694,  endLat: 51.5072,   endLng: -0.1276,    arcAlt: 0.3, color: ARC_COLORS[2] },
+  { order: 7, startLat: -8.8332,   startLng: 13.2648,   endLat: -33.9361,  endLng: 18.4365,    arcAlt: 0.2, color: ARC_COLORS[0] },
+  { order: 7, startLat: 49.2827,   startLng: -123.1207, endLat: 52.3676,   endLng: 4.9041,     arcAlt: 0.2, color: ARC_COLORS[1] },
+  { order: 7, startLat: 1.3521,    startLng: 103.8198,  endLat: 40.7128,   endLng: -74.006,    arcAlt: 0.5, color: ARC_COLORS[2] },
+  { order: 8, startLat: 41.9028,   startLng: 12.4964,   endLat: 34.0522,   endLng: -118.2437,  arcAlt: 0.2, color: ARC_COLORS[0] },
+  { order: 8, startLat: 11.9866,   startLng: 8.5718,    endLat: 35.6762,   endLng: 139.6503,   arcAlt: 0.3, color: ARC_COLORS[1] },
+  { order: 8, startLat: -22.9068,  startLng: -43.1729,  endLat: -34.6037,  endLng: -58.3816,   arcAlt: 0.1, color: ARC_COLORS[2] },
 ]
 
-const marqueeImages = [
+const MARQUEE_IMAGES = [
   "https://assets.aceternity.com/cloudinary_bkp/3d-card.png",
   "https://assets.aceternity.com/animated-modal.png",
   "https://assets.aceternity.com/animated-testimonials.webp",
@@ -69,6 +109,8 @@ const marqueeImages = [
   "https://assets.aceternity.com/wobble-card.png",
   "https://assets.aceternity.com/world-map.webp",
 ]
+
+// ─── Section ──────────────────────────────────────────────────────────────────
 
 export function DualCTASection() {
   return (
@@ -109,15 +151,9 @@ export function DualCTASection() {
   )
 }
 
-function CTACard({
-  label,
-  title,
-  body,
-  href,
-  button,
-  variant,
-  visual,
-}: {
+// ─── Card shell ───────────────────────────────────────────────────────────────
+
+interface CTACardProps {
   label: string
   title: ReactNode
   body: string
@@ -125,14 +161,26 @@ function CTACard({
   button: string
   variant: "orange" | "outlineDark"
   visual: ReactNode
-}) {
+}
+
+function CTACard({ label, title, body, href, button, variant, visual }: CTACardProps) {
   return (
     <div className="group relative flex min-h-[420px] overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-b from-white/[0.045] to-white/[0.015] p-8 transition-colors duration-300 hover:border-white/[0.14] md:p-10">
-      <div className="absolute inset-0 opacity-65 transition-opacity duration-500 group-hover:opacity-95">
+      {/* Visual layer — pointer-events: none so clicks fall through to the CTA */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-65 transition-opacity duration-500 group-hover:opacity-95"
+      >
         {visual}
       </div>
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-fit bg-[radial-gradient(circle_at_50%_0%,rgba(248,130,33,0.16),transparent_66%)]" />
 
+      {/* Radial top glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-fit bg-[radial-gradient(circle_at_50%_0%,rgba(248,130,33,0.16),transparent_66%)]"
+      />
+
+      {/* Copy + CTA */}
       <div className="relative z-10 mt-auto max-w-sm">
         <p className="w-fit font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f0b680]">
           {label}
@@ -140,7 +188,7 @@ function CTACard({
         <h3 className="mt-3 w-fit font-heading text-2xl font-semibold leading-tight tracking-tight text-white md:text-[2rem]">
           {title}
         </h3>
-        <p className="mt-3 text-sm leading-7 text-white/62">{body}</p>
+        <p className="mt-3 text-sm leading-7 text-white/60">{body}</p>
         <Link
           href={href}
           className={cn(buttonVariants({ variant, size: "lg" }), "mt-7")}
@@ -153,22 +201,18 @@ function CTACard({
   )
 }
 
+// ─── Visuals ──────────────────────────────────────────────────────────────────
+
 function BusinessGlobeVisual() {
   return (
-    <div className="absolute left-1/2 top-[50%] h-[420px] w-[520px] -translate-x-1/2 -translate-y-1/2">
-      <div className="pointer-events-none absolute inset-10 rounded-full bg-[var(--brand)]/12 blur-3xl" />
-      <Globe3D
-        markers={sampleMarkers}
-        className="pointer-events-auto h-full"
-        config={{
-          atmosphereColor: "#f88221",
-          atmosphereIntensity: 0.5,
-          bumpScale: 5,
-          autoRotateSpeed: 0.3,
-          showAtmosphere: true,
-          radius: 4,
-        }}
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-10 rounded-full bg-[var(--brand,#f88221)]/[0.08] blur-3xl"
       />
+      <div className="absolute -bottom-10 h-[460px] w-full">
+        <GlobeClient globeConfig={GLOBE_CONFIG} data={GLOBE_ARCS} />
+      </div>
     </div>
   )
 }
@@ -176,9 +220,12 @@ function BusinessGlobeVisual() {
 function AgencyMarqueeVisual() {
   return (
     <div className="absolute inset-0">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_26%,rgba(248,130,33,0.2),transparent_34%)]" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_70%_26%,rgba(248,130,33,0.2),transparent_34%)]"
+      />
       <ThreeDMarquee
-        images={marqueeImages}
+        images={MARQUEE_IMAGES}
         className="absolute left-1/2 top-1/2 h-[500px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-none"
       />
     </div>

@@ -16,6 +16,7 @@ import {
   fadeSlideX,
   fadeUp,
   fadeUpScale,
+  labelViewport,
   sectionStagger,
   sectionViewport,
 } from "@/lib/motion"
@@ -42,7 +43,7 @@ export function WhyUsSection() {
         variants={labelV}
         initial="hidden"
         whileInView="visible"
-        viewport={sectionViewport}
+        viewport={labelViewport}
       >
         <SectionLabel>Why us ?</SectionLabel>
       </motion.div>

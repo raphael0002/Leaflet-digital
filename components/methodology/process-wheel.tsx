@@ -100,7 +100,7 @@ const centerDesc = {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Glow pulse animation — ambient background behind wheel             */
+/*  Glow pulse animation                                               */
 /* ------------------------------------------------------------------ */
 
 const glowPulse = {
@@ -194,8 +194,8 @@ export function ProcessWheel({
   }
 
   return (
-    <div className="relative aspect-square w-full max-w-[600px]">
-      {/* Ambient glow — fades in on mount */}
+    <div className="relative aspect-square w-full max-w-[320px] sm:max-w-[420px] md:max-w-[520px] lg:max-w-[600px]">
+      {/* Ambient glow */}
       <motion.div
         variants={glowPulse}
         initial="hidden"
@@ -223,11 +223,7 @@ export function ProcessWheel({
         {/* Rotating ring */}
         <g
           className="process-wheel-rotate will-change-transform"
-          style={
-            {
-              "--wheel-rotation": `${rotationAngle}deg`,
-            } as CSSProperties
-          }
+          style={{ "--wheel-rotation": `${rotationAngle}deg` } as CSSProperties}
         >
           {segments.map((segment) => {
             const isActive = segment.index === activeIndex
@@ -276,7 +272,7 @@ export function ProcessWheel({
           })}
         </g>
 
-        {/* Inner circle fill */}
+        {/* Inner circle */}
         <circle
           cx={CENTER}
           cy={CENTER}
@@ -285,39 +281,41 @@ export function ProcessWheel({
         />
       </svg>
 
-      {/* Center content — animates on step change */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-[26%]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active.id}
-            variants={centerContainer}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="text-center"
-          >
-            <motion.span
-              variants={centerIndex}
-              className="inline-block font-mono text-xs tracking-[0.3em] text-[var(--brand)]"
+      {/* Center content */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div className="flex h-[48%] w-[48%] items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active.id}
+              variants={centerContainer}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="flex flex-col items-center text-center"
             >
-              {active.index}
-            </motion.span>
+              <motion.span
+                variants={centerIndex}
+                className="inline-block font-mono text-[10px] tracking-[0.3em] text-[var(--brand)] sm:text-xs"
+              >
+                {active.index}
+              </motion.span>
 
-            <motion.h3
-              variants={centerTitle}
-              className="mt-2 text-balance font-heading text-lg font-semibold leading-tight text-[var(--foreground)] md:text-xl"
-            >
-              {active.title}
-            </motion.h3>
+              <motion.h3
+                variants={centerTitle}
+                className="mt-1 text-balance font-heading text-[12px] font-semibold leading-tight text-[var(--foreground)] sm:mt-2 sm:text-base md:text-lg lg:text-xl"
+              >
+                {active.title}
+              </motion.h3>
 
-            <motion.p
-              variants={centerDesc}
-              className="mt-2 text-pretty text-xs leading-relaxed text-[var(--text-muted)] md:text-sm"
-            >
-              {active.description}
-            </motion.p>
-          </motion.div>
-        </AnimatePresence>
+              <motion.p
+                variants={centerDesc}
+                className="hidden sm:block mt-1 line-clamp-3 text-pretty text-[10px] leading-relaxed text-[var(--text-muted)] sm:mt-2 sm:line-clamp-4 sm:text-xs md:text-sm"
+              >
+                {active.description}
+              </motion.p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   )
