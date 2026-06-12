@@ -11,6 +11,7 @@ import {
   TestimonialsSection,
   WhyUsSection,
 } from "@/features/marketing";
+import { BlogSection } from "@/features/marketing/components/blog-section";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -57,6 +58,7 @@ export default function Home() {
       <WhyUsSection />
       <ProcessSection />
       <TestimonialsSection />
+      <BlogSection />
       <FAQSection />
       <DualCTASection />
       <FinalCTASection />

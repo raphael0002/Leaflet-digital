@@ -57,3 +57,13 @@ export type FooterColumn = {
   title: string
   links: string[]
 }
+
+export type BlogPost = {
+  slug: string
+  category: string
+  title: string
+  excerpt: string
+  date: string
+  readTime: string
+  author: string
+}

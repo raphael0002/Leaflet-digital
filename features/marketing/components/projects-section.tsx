@@ -69,12 +69,12 @@ export function ProjectsSection() {
           </Presence>
         </StaggerReveal>
 
-        <Reveal className="mt-14 flex justify-center">
+        {/* <Reveal className="mt-14 flex justify-center">
           <Link href="/work" className={buttonVariants({ variant: "outlineDark" })}>
             Explore Our More Projects
             <ArrowUpRight />
           </Link>
-        </Reveal>
+        </Reveal> */}
       </Container>
     </section>
   )

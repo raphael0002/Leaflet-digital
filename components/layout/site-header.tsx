@@ -115,7 +115,7 @@ export function SiteHeader() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-[100] transition-all duration-500 ease-[var(--ease-premium)]",
-        scrolled ? "py-0" : "py-4"
+        scrolled ? "py-0" : "sm:py-4"
       )}
     >
       <div
@@ -203,7 +203,7 @@ export function SiteHeader() {
         <Link
           href="/#contact"
           className={cn(
-            buttonVariants({ variant: "orange", size: "lg", className: "px-4 hover:shadow-none hover:translate-none" }),
+            buttonVariants({ variant: "orange", size: "default", className: "px-4 hover:shadow-none hover:translate-none" }),
             "inline-flex items-center gap-1.5 lg:hidden"
           )}
         >

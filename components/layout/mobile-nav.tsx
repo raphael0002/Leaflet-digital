@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Menu } from "lucide-react"
+import { Menu, XIcon } from "lucide-react"
 import { motion } from "motion/react"
 
 import { premiumEase } from "@/lib/motion"
@@ -25,12 +25,16 @@ export function MobileNav() {
       <SheetContent
         side="left"
         className="z-[220] flex h-dvh w-full flex-col border-white/10 bg-[var(--background-deep)] px-6 py-8 text-white sm:max-w-md"
-        showCloseButton
+        showCloseButton={false}
       >
-        <SheetHeader className="p-0">
+        <SheetHeader className="p-0 flex flex-row justify-between items-center">
           <SheetTitle className="font-heading text-2xl font-extrabold tracking-normal text-white">
             Leaflet
           </SheetTitle>
+          <SheetClose className="border-2 rounded-md border-white/10 bg-primary hover:bg-primary/80 p-1" nativeButton={false} render={<Button variant="ghostDark"   size="icon-lg" />} >
+            <XIcon className="size-5 hover:text-[var(--brand)]" strokeWidth={3}/>  
+            <span className="sr-only">Close</span>
+          </SheetClose>
         </SheetHeader>
         <motion.nav
           className="mt-14 grid gap-1"
@@ -63,6 +67,7 @@ export function MobileNav() {
               }}
             >
               <SheetClose
+                nativeButton={false}
                 render={
                   <Link
                     href={link.href}

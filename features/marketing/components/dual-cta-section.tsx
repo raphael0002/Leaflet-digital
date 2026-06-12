@@ -180,14 +180,13 @@ function CTACard({
       <div className="absolute inset-0 opacity-65 transition-opacity duration-500 group-hover:opacity-95">
         {visual}
       </div>
-      {/* <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--background)] via-[rgba(11,11,11,0.78)] to-transparent" /> */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-fit bg-[radial-gradient(circle_at_50%_0%,rgba(248,130,33,0.16),transparent_66%)]" />
 
       <div className="relative z-10 mt-auto max-w-sm">
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f0b680]">
+        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f0b680] w-fit">
           {label}
         </p>
-        <h3 className="mt-3 font-heading text-2xl font-semibold leading-tight tracking-tight text-white md:text-[2rem]">
+        <h3 className="mt-3 font-heading text-2xl font-semibold leading-tight tracking-tight text-white md:text-[2rem] w-fit">
           {title}
         </h3>
         <p className="mt-3 text-sm leading-7 text-white/62">{body}</p>
@@ -195,7 +194,7 @@ function CTACard({
           href={href}
           className={cn(
             buttonVariants({ variant, size: "lg" }),
-            "mt-7 rounded-full"
+            "mt-7"
           )}
         >
           {button}
@@ -219,7 +218,7 @@ function BusinessGlobeVisual() {
           bumpScale: 5,
           autoRotateSpeed: 0.3,
           showAtmosphere: true,
-          radius: 5,
+          radius: 4,
         }}
         
       />
